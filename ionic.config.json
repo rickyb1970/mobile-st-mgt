@@ -1,0 +1,7 @@
+{
+  "name": "mobile-st-mgt",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
