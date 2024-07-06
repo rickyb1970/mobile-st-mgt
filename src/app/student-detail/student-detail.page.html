@@ -1,0 +1,37 @@
+<!-- src/app/student-detail/student-detail.component.html -->
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Student Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+@if(student){
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label>Student Number:</ion-label>
+      <ion-note slot="end">{{ student.studentNumber }}</ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-label>Name:</ion-label>
+      <ion-note slot="end">{{ student.studentFirstName }} {{ student.studentLastName }}</ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-label>College:</ion-label>
+      <ion-note slot="end">{{ student.studentCollege }}</ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-label>Program:</ion-label>
+      <ion-note slot="end">{{ student.studentProgram }}</ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-label>Year:</ion-label>
+      <ion-note slot="end">{{ student.studentYear }}</ion-note>
+    </ion-item>
+  </ion-list>
+</ion-content>
+} @else {
+  <ion-content>
+      <ion-label>No Student Information Available</ion-label>
+  </ion-content>
+}
