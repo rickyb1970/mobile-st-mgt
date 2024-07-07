@@ -13,14 +13,22 @@
   @if(students.length > 0){
     @for(student of students; track student.studentNumber){
       <ion-item>
+        <input type="hidden" id="hidden-{{ student.studentNumber }}" #studentID [value]="student.studentNumber" (click)="trap($event)">
         <ion-label>
           <h2>{{ student.studentFirstName }} {{ student.studentLastName }}</h2>
-          <p>{{ student.studentCollege }} - {{ student.studentProgram }} - Year {{ student.studentYear }}</p>
+          <p>{{ student.studentCollege.collegeShortName }} - {{ student.studentProgram.programShortName }} - Year {{ student.studentYear }}</p>
         </ion-label>
         <ion-buttons slot="end">
           <ion-button (click)="editStudent(student.studentNumber)" color="primary">Edit</ion-button>
           <ion-button (click)="viewStudent(student.studentNumber)" color="success">View</ion-button>
-          <ion-button color="danger" (click)="deleteStudent(student.studentNumber)">Delete</ion-button>
+          <ion-button id="deletion-alert-{{ student.studentNumber }}" color="danger">Delete</ion-button>
+          <ion-alert
+             trigger="deletion-alert-{{ student.studentNumber }}"
+             header="Warning!"
+             message="You are about to delete data. Are you sure you want to proceed?"
+             [buttons]="alertButtons"
+             (didDismiss)="processChoice($event)"
+          ></ion-alert>
         </ion-buttons>
       </ion-item>
     }

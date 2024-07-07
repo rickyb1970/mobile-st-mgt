@@ -1,6 +1,9 @@
 <!-- src/app/student-edit/student-edit.component.html -->
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
     <ion-title>Edit Student</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,40 +12,40 @@
   <form [formGroup]="studentForm" (ngSubmit)="submitForm()">
     <input formControlName="studentNumber" type="hidden">
     <ion-item>
-      <ion-label position="floating">First Name</ion-label>
-      <ion-input formControlName="studentFirstName"></ion-input>
+      <!-- <ion-label position="floating">First Name</ion-label> -->
+      <ion-input label="First Name" label-placement="floating" formControlName="studentFirstName"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">Last Name</ion-label>
-      <ion-input formControlName="studentLastName"></ion-input>
+      <!-- <ion-label position="floating">Last Name</ion-label> -->
+      <ion-input label="Last Name" label-placement="floating" formControlName="studentLastName"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">College</ion-label>
-      <ion-select formControlName="studentCollege">
-        @for(college of colleges; track college){
-          @if(student?.studentCollege === college){
-             <ion-select-option *ngFor="let college of colleges" [value]="college" selected>{{ college }}</ion-select-option>
+      <!-- <ion-label position="floating">College</ion-label> -->
+      <ion-select label="College" label-placement="floating" formControlName="studentCollege" (ionChange)="getCollege($event)">
+        @for(college of colleges; track college.collegeId){
+          @if(student?.studentCollege?.collegeId === college.collegeId){
+             <ion-select-option [value]="college" selected>{{ college.collegeFullName }}</ion-select-option>
           } @else {
-             <ion-select-option *ngFor="let college of colleges" [value]="college">{{ college }}</ion-select-option>
+             <ion-select-option [value]="college">{{ college.collegeFullName }}</ion-select-option>
           }
         }
       </ion-select>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">Program</ion-label>
-      <ion-select formControlName="studentProgram">
-        @for(program of programs; track program){
-          @if(student?.studentProgram === program){
-             <ion-select-option *ngFor="let program of programs" [value]="program" selected>{{ program }}</ion-select-option>
+      <!-- <ion-label position="floating">Program</ion-label> -->
+      <ion-select label="Program" label-placement="floating" formControlName="studentProgram">
+        @for(program of programs; track program.programId){
+          @if(student?.studentProgram?.programId === program.programId){
+             <ion-select-option [value]="program" selected>{{ program.programFullName }}</ion-select-option>
           } @else {
-             <ion-select-option *ngFor="let program of programs" [value]="program">{{ program }}</ion-select-option>
+             <ion-select-option [value]="program">{{ program.programFullName }}</ion-select-option>
           }
         }
       </ion-select>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">Year</ion-label>
-      <ion-input type="number" formControlName="studentYear"></ion-input>
+      <!-- <ion-label position="floating">Year</ion-label> -->
+      <ion-input label="Year" label-placement="floating" type="number" formControlName="studentYear"></ion-input>
     </ion-item>
     <ion-button expand="full" type="submit">Save</ion-button>
     <ion-button expand="full" color="medium" (click)="cancel()">Cancel</ion-button>

@@ -1,6 +1,9 @@
 <!-- src/app/student-detail/student-detail.component.html -->
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+       <ion-back-button></ion-back-button>
+    </ion-buttons>
     <ion-title>Student Details</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,24 +12,24 @@
 <ion-content>
   <ion-list>
     <ion-item>
-      <ion-label>Student Number:</ion-label>
-      <ion-note slot="end">{{ student.studentNumber }}</ion-note>
+      <ion-label position="fixed">Student Number:</ion-label>
+      <ion-text>{{ student.studentNumber }}</ion-text>
     </ion-item>
     <ion-item>
-      <ion-label>Name:</ion-label>
-      <ion-note slot="end">{{ student.studentFirstName }} {{ student.studentLastName }}</ion-note>
+      <ion-label position="fixed">Name:</ion-label>
+      <ion-text>{{ student.studentFirstName }} {{ student.studentLastName }}</ion-text>
     </ion-item>
     <ion-item>
-      <ion-label>College:</ion-label>
-      <ion-note slot="end">{{ student.studentCollege }}</ion-note>
+      <ion-label position="fixed">College:</ion-label>
+      <ion-text>{{ student.studentCollege.collegeFullName }}</ion-text>
     </ion-item>
     <ion-item>
-      <ion-label>Program:</ion-label>
-      <ion-note slot="end">{{ student.studentProgram }}</ion-note>
+      <ion-label position="fixed">Program:</ion-label>
+      <ion-text>{{ student.studentProgram.programFullName }}</ion-text>
     </ion-item>
     <ion-item>
-      <ion-label>Year:</ion-label>
-      <ion-note slot="end">{{ student.studentYear }}</ion-note>
+      <ion-label position="fixed">Year:</ion-label>
+      <ion-text>{{ student.studentYear }}</ion-text>
     </ion-item>
   </ion-list>
 </ion-content>

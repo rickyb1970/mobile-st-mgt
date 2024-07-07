@@ -3,6 +3,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StudentService } from '../services/student.service';
+import { College } from '../models/college.model';
+import { Program } from '../models/program.model';
 import { Student } from '../models/student.model';
 
 @Component({
@@ -11,8 +13,9 @@ import { Student } from '../models/student.model';
   styleUrls: ['./student-edit.page.scss'],
 })
 export class StudentEditPage implements OnInit {
-  colleges: string[] = [];
-  programs: string[] = [];
+
+  colleges: College[] | undefined;
+  programs: Program[] | undefined;
 
   @Input() studentNumber: string = '';
 
@@ -26,7 +29,6 @@ export class StudentEditPage implements OnInit {
     private route: ActivatedRoute
   ) {
     this.colleges = this.studentService.getColleges();
-    this.programs = this.studentService.getPrograms();
 
     this.studentForm = this.fb.group({
       studentNumber: [''],
@@ -36,12 +38,15 @@ export class StudentEditPage implements OnInit {
       studentProgram: ['', Validators.required],
       studentYear: ['', [Validators.required, Validators.min(1), Validators.max(5)]]
     });
+
+    this.studentForm.get('studentProgram')?.disable;
   }
 
   ngOnInit(): void {
     // const studentNumber = +this.route.snapshot.paramMap.get('studentNumber')!;
     this.student = this.studentService.getStudent(Number(this.studentNumber));
     if (this.student) {
+      this.programs = this.studentService.getCollege(this.student.studentCollege);
       this.studentForm.patchValue(this.student);
     }
   }
@@ -55,6 +60,12 @@ export class StudentEditPage implements OnInit {
   }
 
   cancel(): void {
+    this.studentForm.reset();
     this.router.navigate(['students']);
+  }
+
+  getCollege(event: any): void {
+    // this.studentService.enableFormControl(this.studentForm,'studentProgram');
+    this.programs = this.studentService.getCollege(event.target.value);
   }
 }
