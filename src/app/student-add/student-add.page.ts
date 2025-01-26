@@ -34,8 +34,8 @@ export class StudentAddPage {
     this.colleges = this.studentService.getColleges();
 
     this.studentForm = this.fb.group({
-      studentFirstName: ['', Validators.required],
-      studentLastName: ['', Validators.required],
+      studentFirstName: ['', Validators.required, Validators.pattern("^[A-z/s-]+?")],
+      studentLastName: ['', Validators.required, Validators.pattern("^[A-z/s-]+?")],
       studentCollege: ['', Validators.required],
       studentProgram: ['', Validators.required],
       studentYear: ['', [Validators.required, Validators.min(1), Validators.max(5)]]
